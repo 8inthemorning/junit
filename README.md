@@ -7,8 +7,10 @@
 ## Author
 
 👤 **Hwanho**
-
 * Github: [@allmind75](https://github.com/allmind75)
+
+## Member
+👤Sehee, 👤Gyumin
 
 ## Show your support
 
