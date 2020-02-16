@@ -18,24 +18,35 @@ import static org.junit.jupiter.api.Assumptions.assumingThat;
 @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
 class StudyTest {
 
-    Logger logger = LoggerFactory.getLogger("com.example.javatest.studyTest");
+    Logger log = LoggerFactory.getLogger("com.example.javatest.studyTest");
 
-    @Test
+    @FastTest
+    void custom_tag_fast_test() {
+        log.info("custom tag is fast");
+    }
+
+    @SlowTest
+    void custom_tag_slow_test() {
+        log.info("custom tag is slow");
+    }
+
+
+    @Disabled
     @DisplayName("태깅 - local에서 실행")
     @Tag("fast")
     void tag_fast_test() {
         Study actual = new Study(10);
         assertThat(actual.getLimit()).isGreaterThan(0);
-        logger.info("tag fast test");
+        log.info("tag fast test");
     }
 
-    @Test
+    @Disabled
     @DisplayName("태깅 - CI 환경에서 실행")
     @Tag("slow")
     void tag_slow_test() {
         Study actual = new Study(10);
         assertThat(actual.getLimit()).isGreaterThan(0);
-        logger.info("tag slow test");
+        log.info("tag slow test");
     }
 
     @Disabled
@@ -47,17 +58,17 @@ class StudyTest {
         String test_env = StringUtils.defaultToString(System.getenv("TEST_ENV"));
 
         assumingThat("NULL".equalsIgnoreCase(test_env), () -> {
-            logger.info("System env is NULL");
+            log.info("System env is NULL");
             Study actual = new Study(100);
         });
 
         assumingThat("LOCAL".equalsIgnoreCase(test_env), () -> {
-            logger.info("System env is LOCAL");
+            log.info("System env is LOCAL");
             Study actual = new Study(-1);
         });
 
         assumeTrue("LOCAL".equalsIgnoreCase(test_env));
-        logger.info("System env is LOCAL");
+        log.info("System env is LOCAL");
     }
 
     @Disabled
@@ -118,9 +129,10 @@ class StudyTest {
     }
 
     @Disabled //@Ignore, Test 실행하지 않고 싶을때 사용 (deprecate 된 코드의 경우)
-    @DisplayName("스터디 생성") // 테스트 별로 이름 지정 가능
+    @DisplayName("스터디 생성")
+        // 테스트 별로 이름 지정 가능
     void create_new_study() {
-        logger.info("create");
+        log.info("create");
     }
 
     //static 으로 작성 (private 불가)
@@ -143,14 +155,14 @@ class StudyTest {
     @BeforeEach
     //@Before
     void beforeEach() {
-        logger.info("before each");
+        log.info("before each");
     }
 
     //각각의 테스트 실행 이후 실행
     @AfterEach
     //@After
     void afterEach() {
-        logger.info("after each");
+        log.info("after each");
     }
 
 }
