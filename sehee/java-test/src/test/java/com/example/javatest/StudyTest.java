@@ -2,8 +2,16 @@ package com.example.javatest;
 
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.condition.*;
+import org.junit.jupiter.api.extension.ParameterContext;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
+import org.junit.jupiter.params.aggregator.AggregateWith;
+import org.junit.jupiter.params.aggregator.ArgumentsAccessor;
+import org.junit.jupiter.params.aggregator.ArgumentsAggregationException;
+import org.junit.jupiter.params.aggregator.ArgumentsAggregator;
+import org.junit.jupiter.params.converter.ArgumentConversionException;
+import org.junit.jupiter.params.converter.ConvertWith;
+import org.junit.jupiter.params.converter.SimpleArgumentConverter;
+import org.junit.jupiter.params.provider.*;
 import org.junit.platform.commons.util.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,11 +30,60 @@ class StudyTest {
 
     Logger log = LoggerFactory.getLogger("com.example.javatest.studyTest");
 
+    @ParameterizedTest(name = "{displayName} message({index}) = {0}")
+    @CsvSource({"10, '테스트 첫번째'", "20, '테스트 두번째'"})
+    @DisplayName("파라미터 주입 실행 - ArgumentsAggregator")
+    void parameterizedTest_5(@AggregateWith(StudyAggregator.class) Study study) {
+        log.info(study.toString());
+    }
+
+    //static inner class거나 public 만 가능
+    static class StudyAggregator implements ArgumentsAggregator {
+        @Override
+        public Object aggregateArguments(ArgumentsAccessor argumentsAccessor, ParameterContext parameterContext) throws ArgumentsAggregationException {
+            return new Study(argumentsAccessor.getInteger(0), argumentsAccessor.getString(1));
+        }
+    }
+
+    @ParameterizedTest(name = "{displayName} message({index}) = {0}")
+    @CsvSource({"10, '테스트 첫번째'", "20, '테스트 두번째'"})
+    @DisplayName("파라미터 주입 실행 - ArgumentsAccessor")
+    void parameterizedTest_4(ArgumentsAccessor argumentsAccessor) {
+        Study study = new Study(argumentsAccessor.getInteger(0), argumentsAccessor.getString(1));
+        log.info(study.toString());
+    }
+
+    @ParameterizedTest(name = "{displayName} message({index}) = {0}")
+    @CsvSource({"10, '테스트 첫번째'", "20, '테스트 두번째'"})
+    @DisplayName("파라미터 주입 실행 - CsvSource")
+    void parameterizedTest_3(Integer limit, String name) {
+        Study study = new Study(limit, name);
+        log.info(study.toString());
+    }
+
+    @Disabled
+    @ParameterizedTest(name = "{displayName} message({index}) = {0}")
+    @ValueSource(ints = {10, 20, 30})
+    @DisplayName("파라미터 주입 실행 - ValueSource and ConvertWith")
+    void parameterizedTest_2(@ConvertWith(StudyConverter.class) Study study) {
+        log.info(String.valueOf(study.getLimit()));
+    }
+
+    static class StudyConverter extends SimpleArgumentConverter {
+        @Override
+        protected Object convert(Object source, Class<?> targetType) throws ArgumentConversionException {
+            assertEquals(Study.class, targetType, "can only convert to Study");
+            return new Study(Integer.parseInt(source.toString()));
+        }
+    }
+
     //@ParameterizedTest 은 @Test와 같은 Test class이기에 중복 사용 불가함
+    @Disabled
     @ParameterizedTest(name = "{displayName} message({index}) = {0}")
     @ValueSource(strings = {"테스트", "코드를", "치기", "매우", "귀찮다"})
-    @DisplayName("파라미터 주입 실행")
-    void parameterizedTest(String message) {
+    @NullAndEmptySource
+    @DisplayName("파라미터 주입 실행 - ValueSource")
+    void parameterizedTest_1(String message) {
         log.info(message);
     }
 
