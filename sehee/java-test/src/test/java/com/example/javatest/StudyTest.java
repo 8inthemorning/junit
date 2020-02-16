@@ -2,7 +2,9 @@ package com.example.javatest;
 
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.condition.*;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.api.extension.ParameterContext;
+import org.junit.jupiter.api.extension.RegisterExtension;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.aggregator.AggregateWith;
 import org.junit.jupiter.params.aggregator.ArgumentsAccessor;
@@ -24,17 +26,35 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assumptions.assumeTrue;
 import static org.junit.jupiter.api.Assumptions.assumingThat;
 
-@DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class) //Run Dashboard에 테스트명 노출 전략
-@TestInstance(TestInstance.Lifecycle.PER_CLASS)//1개의 Class Instance를 생성하여 Test 간 공유함
+//@ExtendWith(FindSlowTestExtension.class) //Extension 선언적 등록 방법 (Instance 생성 방법을 커스텀 할수 없음)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)//@Order Annotation 으로 @Test Method 순서를 정함
 class StudyTest {
 
     Logger log = LoggerFactory.getLogger("com.example.javatest.studyTest");
+
+    //Extension 코딩적 등록 방법 (Instance 생성 방법 커스텀 가능하여 인자를 넘길수 있음)
+    @RegisterExtension
+    static FindSlowTestExtension findSlowTestExtension =
+            new FindSlowTestExtension(1000L);
+
     int value = 1;
+
+    @Test
+//    @SlowTest
+    @DisplayName("확장 모델 사용")
+    void ExtensionTest_1() {
+        try {
+            Long val = new Long(1005L);
+            Thread.sleep(val);
+            log.info("Extension Test - sleep : {}ms", val);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 
     //@Test 마다 StudyTest class Instance를 새로 만들기에 value값이 증가하지 않음
     //why? Test는 순서가 정해지지 않기에 Test 간 의존성을 없애기 위함
-    @Test
+    @Disabled
     @DisplayName("테스트 인스턴스 1")
     @Order(2) //낮은 값일수록 높은 우선순위
     void InstanceTest_1() {
@@ -43,7 +63,7 @@ class StudyTest {
         log.info("value : {}", String.valueOf(value));
     }
 
-    @Test
+    @Disabled
     @DisplayName("테스트 인스턴스 2")
     @Order(1) //낮은 값일수록 높은 우선순위
     void InstanceTest_2() {
