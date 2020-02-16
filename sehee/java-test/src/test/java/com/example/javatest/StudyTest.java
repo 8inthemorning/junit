@@ -4,10 +4,13 @@ import org.junit.jupiter.api.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+//Run Dashboard에 테스트명 노출 전략
+@DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
 class StudyTest {
 
     @Test
-    void create() {
+    @DisplayName("새 스터디 생성 \uD83D\uDE18") //테스트 별로 이름 지정 가능
+    void create_new_study() {
         Study study = new Study();
         assertNotNull(study);
         System.out.println("create");
@@ -15,7 +18,7 @@ class StudyTest {
 
     @Test //@Test
     @Disabled //@Ignore, Test 실행하지 않고 싶을때 사용 (deprecate 된 코드의 경우)
-    void create1() {
+    void create_new_study_again() {
         System.out.println("create1");
     }
 
