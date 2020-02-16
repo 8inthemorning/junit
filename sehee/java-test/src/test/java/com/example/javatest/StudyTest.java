@@ -1,25 +1,50 @@
 package com.example.javatest;
 
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.condition.*;
+import org.junit.platform.commons.util.StringUtils;
 
 import java.time.Duration;
 import java.util.function.Supplier;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assumptions.assumeTrue;
+import static org.junit.jupiter.api.Assumptions.assumingThat;
 
 //Run Dashboard에 테스트명 노출 전략
 @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
 class StudyTest {
 
     @Test
+    @DisplayName("assumption이 true 이면 이하 코드 실행하도록 조건 명시")
+    @EnabledOnOs({OS.WINDOWS, OS.MAC})
+    @EnabledOnJre({JRE.JAVA_8, JRE.JAVA_9, JRE.JAVA_10, JRE.JAVA_11, JRE.OTHER})
+    @EnabledIfEnvironmentVariable(named = "TEST_ENV", matches = "LOCAL")
+    void assume_test() {
+        String test_env = StringUtils.defaultToString(System.getenv("TEST_ENV"));
+
+        assumingThat("NULL".equalsIgnoreCase(test_env), () -> {
+            System.out.println("System env is NULL");
+            Study actual = new Study(100);
+        });
+
+        assumingThat("LOCAL".equalsIgnoreCase(test_env), () -> {
+            System.out.println("System env is LOCAL");
+            Study actual = new Study(-1);
+        });
+
+        assumeTrue("LOCAL".equalsIgnoreCase(test_env));
+        System.out.println("System env is LOCAL");
+    }
+
+    @Disabled
     @DisplayName("특정 값과 비교 확인")
     void assertThat_test() {
         Study actual = new Study(10);
         assertThat(actual.getLimit()).isGreaterThan(0);
     }
 
-        @Test
     @Disabled
     @DisplayName("특정 시간 내로 끝나는지 확인 (100ms 소요)")
     void assertTimeoutPreemptively_test() {
@@ -32,7 +57,6 @@ class StudyTest {
         // TODO ThreadLocal는 다른 thread에서 공유가 안되기에 트랜잭션 처리가 제대로 안됨
     }
 
-    @Test
     @Disabled
     @DisplayName("특정 시간 내로 끝나는지 확인")
     void assertTimeout_test() {
@@ -43,7 +67,6 @@ class StudyTest {
         });
     }
 
-    @Test
     @Disabled
     @DisplayName("오류가 예상과 같은지 확인")
     void assertThrows_test() {
@@ -52,7 +75,6 @@ class StudyTest {
         assertEquals("limit 은 0보다 커야한다.", exception.getMessage());
     }
 
-    @Test
     @Disabled
     @DisplayName("연관된 assert를 한번에 묶어서 확인")
     void assertAll_test() {
@@ -73,9 +95,8 @@ class StudyTest {
         );
     }
 
-    @Test
     @Disabled //@Ignore, Test 실행하지 않고 싶을때 사용 (deprecate 된 코드의 경우)
-    @DisplayName("스터디 생성")// 테스트 별로 이름 지정 가능
+    @DisplayName("스터디 생성") // 테스트 별로 이름 지정 가능
     void create_new_study() {
         System.out.println("create");
     }
