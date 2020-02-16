@@ -24,12 +24,32 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assumptions.assumeTrue;
 import static org.junit.jupiter.api.Assumptions.assumingThat;
 
-//Run Dashboard에 테스트명 노출 전략
-@DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
+@DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class) //Run Dashboard에 테스트명 노출 전략
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
+        //1개의 Class Instance를 생성하여 Test 간 공유함
 class StudyTest {
 
     Logger log = LoggerFactory.getLogger("com.example.javatest.studyTest");
+    int value = 1;
 
+    //@Test 마다 StudyTest class Instance를 새로 만들기에 value값이 증가하지 않음
+    //why? Test는 순서가 정해지지 않기에 Test 간 의존성을 없애기 위함
+    @Test
+    @DisplayName("테스트 인스턴스 1")
+    void InstanceTest_1() {
+        log.info("value : {}", String.valueOf(value));
+        Study study = new Study(value++);
+        log.info("value : {}", String.valueOf(value));
+    }
+
+    @Test
+    @DisplayName("테스트 인스턴스 2")
+    void InstanceTest_2() {
+        log.info("value : {}", String.valueOf(value++));
+        log.info("value : {}", String.valueOf(value));
+    }
+
+    @Disabled
     @ParameterizedTest(name = "{displayName} message({index}) = {0}")
     @CsvSource({"10, '테스트 첫번째'", "20, '테스트 두번째'"})
     @DisplayName("파라미터 주입 실행 - ArgumentsAggregator")
@@ -45,6 +65,7 @@ class StudyTest {
         }
     }
 
+    @Disabled
     @ParameterizedTest(name = "{displayName} message({index}) = {0}")
     @CsvSource({"10, '테스트 첫번째'", "20, '테스트 두번째'"})
     @DisplayName("파라미터 주입 실행 - ArgumentsAccessor")
@@ -53,6 +74,7 @@ class StudyTest {
         log.info(study.toString());
     }
 
+    @Disabled
     @ParameterizedTest(name = "{displayName} message({index}) = {0}")
     @CsvSource({"10, '테스트 첫번째'", "20, '테스트 두번째'"})
     @DisplayName("파라미터 주입 실행 - CsvSource")
@@ -210,19 +232,19 @@ class StudyTest {
         log.info("create");
     }
 
-    //static 으로 작성 (private 불가)
+    //static 으로 작성 (@TestInstance 사용하면 static 일 필요 X)
     //return 타입 설정 불가
     //모든 테스트 실행 이전 딱 한번 실행
     @BeforeAll //@BeforeClass
-    static void beforeAll() {
+    void beforeAll() {
         System.out.println("before all");
     }
 
-    //static 으로 작성 (private 불가)
+    //static 으로 작성 (@TestInstance 사용하면 static 일 필요 X)
     //return 타입 설정 불가
     //모든 테스트 실행 이후 딱 한번 실행
     @AfterAll //@AfterClass
-    static void afterAll() {
+    void afterAll() {
         System.out.println("after all");
     }
 
