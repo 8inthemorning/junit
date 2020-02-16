@@ -25,8 +25,8 @@ import static org.junit.jupiter.api.Assumptions.assumeTrue;
 import static org.junit.jupiter.api.Assumptions.assumingThat;
 
 @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class) //Run Dashboard에 테스트명 노출 전략
-@TestInstance(TestInstance.Lifecycle.PER_CLASS)
-        //1개의 Class Instance를 생성하여 Test 간 공유함
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)//1개의 Class Instance를 생성하여 Test 간 공유함
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)//@Order Annotation 으로 @Test Method 순서를 정함
 class StudyTest {
 
     Logger log = LoggerFactory.getLogger("com.example.javatest.studyTest");
@@ -36,6 +36,7 @@ class StudyTest {
     //why? Test는 순서가 정해지지 않기에 Test 간 의존성을 없애기 위함
     @Test
     @DisplayName("테스트 인스턴스 1")
+    @Order(2) //낮은 값일수록 높은 우선순위
     void InstanceTest_1() {
         log.info("value : {}", String.valueOf(value));
         Study study = new Study(value++);
@@ -44,6 +45,7 @@ class StudyTest {
 
     @Test
     @DisplayName("테스트 인스턴스 2")
+    @Order(1) //낮은 값일수록 높은 우선순위
     void InstanceTest_2() {
         log.info("value : {}", String.valueOf(value++));
         log.info("value : {}", String.valueOf(value));
