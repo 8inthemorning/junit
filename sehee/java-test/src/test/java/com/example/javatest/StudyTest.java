@@ -40,7 +40,7 @@ class StudyTest {
     int value = 1;
 
     @Test
-//    @SlowTest
+    @SlowTest
     @DisplayName("확장 모델 사용")
     void ExtensionTest_1() {
         try {
