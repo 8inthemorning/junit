@@ -3,6 +3,8 @@ package com.example.javatest;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.condition.*;
 import org.junit.platform.commons.util.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.time.Duration;
 import java.util.function.Supplier;
@@ -16,7 +18,27 @@ import static org.junit.jupiter.api.Assumptions.assumingThat;
 @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
 class StudyTest {
 
+    Logger logger = LoggerFactory.getLogger("com.example.javatest.studyTest");
+
     @Test
+    @DisplayName("태깅 - local에서 실행")
+    @Tag("fast")
+    void tag_fast_test() {
+        Study actual = new Study(10);
+        assertThat(actual.getLimit()).isGreaterThan(0);
+        logger.info("tag fast test");
+    }
+
+    @Test
+    @DisplayName("태깅 - CI 환경에서 실행")
+    @Tag("slow")
+    void tag_slow_test() {
+        Study actual = new Study(10);
+        assertThat(actual.getLimit()).isGreaterThan(0);
+        logger.info("tag slow test");
+    }
+
+    @Disabled
     @DisplayName("assumption이 true 이면 이하 코드 실행하도록 조건 명시")
     @EnabledOnOs({OS.WINDOWS, OS.MAC})
     @EnabledOnJre({JRE.JAVA_8, JRE.JAVA_9, JRE.JAVA_10, JRE.JAVA_11, JRE.OTHER})
@@ -25,17 +47,17 @@ class StudyTest {
         String test_env = StringUtils.defaultToString(System.getenv("TEST_ENV"));
 
         assumingThat("NULL".equalsIgnoreCase(test_env), () -> {
-            System.out.println("System env is NULL");
+            logger.info("System env is NULL");
             Study actual = new Study(100);
         });
 
         assumingThat("LOCAL".equalsIgnoreCase(test_env), () -> {
-            System.out.println("System env is LOCAL");
+            logger.info("System env is LOCAL");
             Study actual = new Study(-1);
         });
 
         assumeTrue("LOCAL".equalsIgnoreCase(test_env));
-        System.out.println("System env is LOCAL");
+        logger.info("System env is LOCAL");
     }
 
     @Disabled
@@ -98,7 +120,7 @@ class StudyTest {
     @Disabled //@Ignore, Test 실행하지 않고 싶을때 사용 (deprecate 된 코드의 경우)
     @DisplayName("스터디 생성") // 테스트 별로 이름 지정 가능
     void create_new_study() {
-        System.out.println("create");
+        logger.info("create");
     }
 
     //static 으로 작성 (private 불가)
@@ -121,14 +143,14 @@ class StudyTest {
     @BeforeEach
     //@Before
     void beforeEach() {
-        System.out.println("before each");
+        logger.info("before each");
     }
 
     //각각의 테스트 실행 이후 실행
     @AfterEach
     //@After
     void afterEach() {
-        System.out.println("after each");
+        logger.info("after each");
     }
 
 }
