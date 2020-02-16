@@ -5,6 +5,7 @@ import org.junit.jupiter.api.*;
 import java.time.Duration;
 import java.util.function.Supplier;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 //Run Dashboard에 테스트명 노출 전략
@@ -12,6 +13,14 @@ import static org.junit.jupiter.api.Assertions.*;
 class StudyTest {
 
     @Test
+    @DisplayName("특정 값과 비교 확인")
+    void assertThat_test() {
+        Study actual = new Study(10);
+        assertThat(actual.getLimit()).isGreaterThan(0);
+    }
+
+        @Test
+    @Disabled
     @DisplayName("특정 시간 내로 끝나는지 확인 (100ms 소요)")
     void assertTimeoutPreemptively_test() {
         //해당 assert는 100ms 소요
@@ -27,8 +36,6 @@ class StudyTest {
     @Disabled
     @DisplayName("특정 시간 내로 끝나는지 확인")
     void assertTimeout_test() {
-        Study study = new Study(-10);
-
         //해당 assert는 315ms 소요
         assertTimeout(Duration.ofMillis(100), () -> {
             new Study(10);
@@ -40,8 +47,6 @@ class StudyTest {
     @Disabled
     @DisplayName("오류가 예상과 같은지 확인")
     void assertThrows_test() {
-        Study study = new Study(-10);
-
         IllegalArgumentException exception =
                 assertThrows(IllegalArgumentException.class, () -> new Study(-10));
         assertEquals("limit 은 0보다 커야한다.", exception.getMessage());
