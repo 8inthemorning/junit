@@ -2,6 +2,8 @@ package com.example.javatest;
 
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.condition.*;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.junit.platform.commons.util.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,6 +21,22 @@ import static org.junit.jupiter.api.Assumptions.assumingThat;
 class StudyTest {
 
     Logger log = LoggerFactory.getLogger("com.example.javatest.studyTest");
+
+    //@ParameterizedTest 은 @Test와 같은 Test class이기에 중복 사용 불가함
+    @ParameterizedTest(name = "{displayName} message({index}) = {0}")
+    @ValueSource(strings = {"테스트", "코드를", "치기", "매우", "귀찮다"})
+    @DisplayName("파라미터 주입 실행")
+    void parameterizedTest(String message) {
+        log.info(message);
+    }
+
+    @Disabled
+    @DisplayName("테스트 반복 실행")
+    @RepeatedTest(value = 10, name = "{displayName}, {currentRepetition} / {totalRepetitions}")
+    void repeatTest(RepetitionInfo repetitionInfo) {
+        log.info("test : {} / total : {}"
+                , repetitionInfo.getCurrentRepetition(), repetitionInfo.getTotalRepetitions());
+    }
 
     @FastTest
     void custom_tag_fast_test() {
