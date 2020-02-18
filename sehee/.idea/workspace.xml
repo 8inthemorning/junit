@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="0dada7c7-7ac1-40fb-bf53-29b17a6eaa49" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+        <option value="JUnit5 Test Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="importAutomatically" value="true" />
+      </MavenImportingSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="1XsAZHqmdzubulo49dJULI8cEGa" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit5" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5" value="" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="com.example.javatest" />
+    </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="JavaTestApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="java-test" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="JavaTestApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="0dada7c7-7ac1-40fb-bf53-29b17a6eaa49" name="Default Changelist" comment="" />
+      <created>1581824481930</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1581824481930</updated>
+      <workItem from="1581824487558" duration="362000" />
+      <workItem from="1581825053002" duration="120000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <ignored-roots>
+      <path value="$PROJECT_DIR$" />
+    </ignored-roots>
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="729" y="152" key="FileChooserDialogImpl" timestamp="1581825152161">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="729" y="152" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1581825152161" />
+    <state x="1033" y="302" width="261" height="219" key="Github.ShareDialog" timestamp="1581824703488">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="1033" y="302" width="261" height="219" key="Github.ShareDialog/0.0.1536.824@0.0.1536.824" timestamp="1581824703488" />
+    <state x="974" y="117" key="Github.UntrackedFilesDialog" timestamp="1581824711879">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="974" y="117" key="Github.UntrackedFilesDialog/0.0.1536.824@0.0.1536.824" timestamp="1581824711879" />
+    <state x="813" y="109" key="NewModule_or_Project.wizard" timestamp="1581824957912">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="813" y="109" key="NewModule_or_Project.wizard/0.0.1536.824@0.0.1536.824" timestamp="1581824957912" />
+    <state x="498" y="0" key="SettingsEditor" timestamp="1581825069455">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="498" y="0" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1581825069455" />
+    <state x="924" y="130" key="com.intellij.testIntegration.createTest.CreateTestDialog" timestamp="1581824560493">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="924" y="130" key="com.intellij.testIntegration.createTest.CreateTestDialog/0.0.1536.824@0.0.1536.824" timestamp="1581824560493" />
+    <state x="360" y="113" key="new project wizard" timestamp="1581825168786">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="360" y="113" key="new project wizard/0.0.1536.824@0.0.1536.824" timestamp="1581825168786" />
+    <state x="815" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1581824884203">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="815" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1581824884203" />
+  </component>
+</project>
