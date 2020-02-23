@@ -1,7 +1,13 @@
 package com.example.junit.domain;
 
 import com.example.junit.study.StudyStatus;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
+@Getter
+@Setter
+@ToString
 public class Study {
 
     private StudyStatus status = StudyStatus.DRAFT;
@@ -36,12 +42,16 @@ public class Study {
         this.member = member;
     }
 
-    @Override
-    public String toString() {
-        return "Study{" +
-                "status=" + status +
-                ", limit=" + limit +
-                ", name='" + name + '\'' +
-                '}';
+    public Member getOwner() {
+        return this.member;
     }
+
+//    @Override
+//    public String toString() {
+//        return "Study{" +
+//                "status=" + status +
+//                ", limit=" + limit +
+//                ", name='" + name + '\'' +
+//                '}';
+//    }
 }

@@ -113,5 +113,27 @@ class StudyServiceTest {
 
     }
 
+    @Test
+    void stubbingTest(@Mock MemberService memberService, @Mock StudyRepository studyRepository) {
+        StudyService studyService = new StudyService(memberService, studyRepository);
+        assertNotNull(studyService);
+
+        Study study = new Study(10, "테스트");
+        Member member = new Member();
+        member.setId(1L);
+        member.setEmail("allmind75@gmail.com");
+
+        // TODO memberService 객체에 findById 메소드를 1L 값으로 호출하면 Optional.of(member) 객체를 리턴하도록 Stubbing
+        when(memberService.findById(1L)).thenReturn(Optional.of(member));
+
+        // TODO studyRepository 객체에 save 메소드를 study 객체로 호출하면 study 객체 그대로 리턴하도록 Stubbing
+        when(studyRepository.save(study)).thenReturn(study);
+
+        studyService.createNewStudy(1L, study);
+
+        assertNotNull(study.getOwner());
+        assertEquals(member, study.getOwner());
+    }
+
 
 }
