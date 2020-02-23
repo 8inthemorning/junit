@@ -1,10 +1,13 @@
-package com.example.junit;
+package com.example.junit.domain;
+
+import com.example.junit.study.StudyStatus;
 
 public class Study {
 
     private StudyStatus status = StudyStatus.DRAFT;
     private int limit;
     private String name;
+    private Member member;
 
     public Study(int limit, String name) {
         this.limit = limit;
@@ -27,6 +30,10 @@ public class Study {
 
     public String getName() {
         return name;
+    }
+
+    public void setOwner(Member member) {
+        this.member = member;
     }
 
     @Override
