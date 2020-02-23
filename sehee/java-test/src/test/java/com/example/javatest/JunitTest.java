@@ -1,8 +1,9 @@
 package com.example.javatest;
 
+import com.example.javatest.domain.Study;
+import com.example.javatest.domain.StudyStatus;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.condition.*;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.api.extension.ParameterContext;
 import org.junit.jupiter.api.extension.RegisterExtension;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -19,7 +20,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.time.Duration;
-import java.util.function.Supplier;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
@@ -28,14 +28,14 @@ import static org.junit.jupiter.api.Assumptions.assumingThat;
 
 //@ExtendWith(FindSlowTestExtension.class) //Extension 선언적 등록 방법 (Instance 생성 방법을 커스텀 할수 없음)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)//@Order Annotation 으로 @Test Method 순서를 정함
-class StudyTest {
+class JunitTest {
 
     Logger log = LoggerFactory.getLogger("com.example.javatest.studyTest");
 
     //Extension 코딩적 등록 방법 (Instance 생성 방법 커스텀 가능하여 인자를 넘길수 있음)
     @RegisterExtension
-    static FindSlowTestExtension findSlowTestExtension =
-            new FindSlowTestExtension(1000L);
+    static FindSlowExtensionTest findSlowExtensionTest =
+            new FindSlowExtensionTest(1000L);
 
     int value = 1;
 
@@ -110,7 +110,7 @@ class StudyTest {
     @ValueSource(ints = {10, 20, 30})
     @DisplayName("파라미터 주입 실행 - ValueSource and ConvertWith")
     void parameterizedTest_2(@ConvertWith(StudyConverter.class) Study study) {
-        log.info(String.valueOf(study.getLimit()));
+        log.info(String.valueOf(study.getLimitCount()));
     }
 
     static class StudyConverter extends SimpleArgumentConverter {
@@ -155,7 +155,7 @@ class StudyTest {
     @Tag("fast")
     void tag_fast_test() {
         Study actual = new Study(10);
-        assertThat(actual.getLimit()).isGreaterThan(0);
+        assertThat(actual.getLimitCount()).isGreaterThan(0);
         log.info("tag fast test");
     }
 
@@ -164,7 +164,7 @@ class StudyTest {
     @Tag("slow")
     void tag_slow_test() {
         Study actual = new Study(10);
-        assertThat(actual.getLimit()).isGreaterThan(0);
+        assertThat(actual.getLimitCount()).isGreaterThan(0);
         log.info("tag slow test");
     }
 
@@ -194,7 +194,7 @@ class StudyTest {
     @DisplayName("특정 값과 비교 확인")
     void assertThat_test() {
         Study actual = new Study(10);
-        assertThat(actual.getLimit()).isGreaterThan(0);
+        assertThat(actual.getLimitCount()).isGreaterThan(0);
     }
 
     @Disabled
@@ -243,7 +243,7 @@ class StudyTest {
                 //                return "스터디를 처음 만들면 DRAFT 상태다.";
                 //            }
                 //        });
-                () -> assertTrue(study.getLimit() > 0, "스터디 최대 참석 가능 인원은 0보다 커야 한다.")
+                () -> assertTrue(study.getLimitCount() > 0, "스터디 최대 참석 가능 인원은 0보다 커야 한다.")
         );
     }
 

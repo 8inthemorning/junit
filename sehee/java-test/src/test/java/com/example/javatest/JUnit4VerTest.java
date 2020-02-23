@@ -3,7 +3,7 @@ package com.example.javatest;
 //org.junit.jupiter.api.Test 는 JUnit 5 버전임
 import org.junit.*;
 
-public class StudyJUnit4Test {
+public class JUnit4VerTest {
 
     @Test
     public void test() {
