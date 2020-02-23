@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.time.LocalDateTime;
+
 @Getter
 @Setter
 @ToString
@@ -14,6 +16,7 @@ public class Study {
     private int limit;
     private String name;
     private Member member;
+    private LocalDateTime openedDateTime;
 
     public Study(int limit, String name) {
         this.limit = limit;
@@ -46,12 +49,8 @@ public class Study {
         return this.member;
     }
 
-//    @Override
-//    public String toString() {
-//        return "Study{" +
-//                "status=" + status +
-//                ", limit=" + limit +
-//                ", name='" + name + '\'' +
-//                '}';
-//    }
+    public void open() {
+        this.openedDateTime = LocalDateTime.now();
+        this.status = StudyStatus.OPEND;
+    }
 }
