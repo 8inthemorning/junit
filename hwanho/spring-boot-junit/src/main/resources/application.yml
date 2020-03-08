@@ -9,16 +9,7 @@ spring:
     username: studytest
     password: studytest
 
----
-spring:
-  profiles: test
-  jpa:
-    hibernate.ddl-auto: create-drop #test 실행시 모든 테이블을 비우고 실행, 새로운 스키마 생성
-  datasource:
-    url: jdbc:tc:postgresql:///study-testdb
-    driver-class-name: org.testcontainers.jdbc.ContainerDatabaseDriver
 
----
 
 #spring.jpa.hibernate.ddl-auto=update
 #
