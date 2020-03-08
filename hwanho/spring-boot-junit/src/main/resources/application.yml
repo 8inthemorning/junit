@@ -1,1 +1,26 @@
 
+spring:
+  profiles:
+    active: local
+  jpa:
+    hibernate.ddl-auto: update
+  datasource:
+    url: jdbc:postgresql://localhost:5432/study-test
+    username: studytest
+    password: studytest
+
+
+
+#spring.jpa.hibernate.ddl-auto=update
+#
+#spring.datasource.url=jdbc:postgresql://localhost:15432/studytest
+#spring.datasource.username=studytest
+#spring.datasource.password=studytest
+
+#spring.profiles.active=chaos-monkey
+#
+#management.endpoint.chaosmonkey.enabled=true
+#management.endpoints.web.exposure.include=health,info,chaosmonkey
+#
+#chaos.monkey.watcher.repository=true
+
