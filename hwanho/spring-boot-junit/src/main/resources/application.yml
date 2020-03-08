@@ -1,1 +1,35 @@
 
+spring:
+  profiles:
+    active: local
+  jpa:
+    hibernate.ddl-auto: update
+  datasource:
+    url: jdbc:postgresql://localhost:5432/study-test
+    username: studytest
+    password: studytest
+
+---
+spring:
+  profiles: test
+  jpa:
+    hibernate.ddl-auto: create-drop #test 실행시 모든 테이블을 비우고 실행, 새로운 스키마 생성
+  datasource:
+    url: jdbc:tc:postgresql:///study-testdb
+    driver-class-name: org.testcontainers.jdbc.ContainerDatabaseDriver
+
+---
+
+#spring.jpa.hibernate.ddl-auto=update
+#
+#spring.datasource.url=jdbc:postgresql://localhost:15432/studytest
+#spring.datasource.username=studytest
+#spring.datasource.password=studytest
+
+#spring.profiles.active=chaos-monkey
+#
+#management.endpoint.chaosmonkey.enabled=true
+#management.endpoints.web.exposure.include=health,info,chaosmonkey
+#
+#chaos.monkey.watcher.repository=true
+
